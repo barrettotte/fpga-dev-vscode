@@ -1,0 +1,44 @@
+# Use TCL to input email and password
+# Based on https://myon.info/blog/2024/07/06/vivado-docker/
+
+# load env file
+set envFile "/vivado.env"
+set fileId [open $envFile r]
+set fileContent [read $fileId]
+close $fileId
+
+# load env variables
+set lines [split $fileContent "\n"]
+foreach line $lines {
+  set line [string trim $line]
+
+  # ignore empty lines/comments
+  if {[string length $line] == 0 || [string index $line 0] == "#"} {
+    continue
+  }
+
+  # split key/value and set env variable
+  set pair [split $line "="]
+  set key [string trim [lindex $pair 0]]
+  set val [string trim [lindex $pair 1]]
+  set env($key) $val
+}
+
+set executable [lindex $argv 0];
+set username $env(AMD_USERNAME)
+set password $env(AMD_PASSWORD)
+set timeout -1
+
+spawn "$executable" -b AuthTokenGen
+expect {
+  -re ".*E-mail Address:" {
+    send -- "$username\r"
+    exp_continue
+  }
+  -re ".*Password:" {
+    send -- "$password\r"
+    exp_continue
+  }
+  eof
+}
+exit [lindex [wait] 3]
