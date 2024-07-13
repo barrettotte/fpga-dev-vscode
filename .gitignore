@@ -1,2 +1,9 @@
-vivado-docker/*.env
-vivado-docker/*.bin
+misc/vivado-docker/*.env
+misc/vivado-docker/*.bin
+
+vivado*.jou
+vivado*.log
+clockinfo.txt
+
+build/
+.Xil/
