@@ -10,4 +10,3 @@ build/
 
 project/*
 !project/*.tcl
-!project/*.xpr
