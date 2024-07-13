@@ -37,3 +37,4 @@ I may try this again in the future and update this repo with more notes/instruct
 
 - [Basys 3 Reference Manual](https://digilent.com/reference/programmable-logic/basys-3/reference-manual)
 - [Vivado Design Suite Tcl Command Reference Guide](https://docs.amd.com/r/en-US/ug835-vivado-tcl-commands)
+- https://projectf.io/posts/vivado-tcl-build-script/

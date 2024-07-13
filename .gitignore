@@ -7,3 +7,7 @@ clockinfo.txt
 
 build/
 .Xil/
+
+project/*
+!project/*.tcl
+!project/*.xpr
