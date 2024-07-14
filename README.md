@@ -27,7 +27,7 @@ Edit source in VS Code, the [vscode-verilog-hdl-support](https://github.com/mshr
 make build
 
 # build and upload bitstream to FPGA
-make program
+make program_board
 
 # create Vivado project
 make create_project
