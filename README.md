@@ -14,9 +14,10 @@ But, I'm assuming I'll make the switch to Linux at some point and I'll update my
 
 - Vivado 2023.2+
 - GNU Make
+- GTKWave
 
 Verify Vivado is installed and its binaries (`xilinx/Vivado/2023.2/bin`) are in system path with `vivado -version`.
-Also, verify GNU Make is installed with `make -v`.
+Also, verify GNU Make is installed with `make -v` and GTKWave is installed with `wsl -e gtkwave --version`.
 
 ### Workflow
 
@@ -26,9 +27,16 @@ Edit source in VS Code, the [vscode-verilog-hdl-support](https://github.com/mshr
 # build bitstream file
 make build
 
+# simulate, generate waveform, and open in gtkwave
+make simulate
+
 # build and upload bitstream to FPGA
 make program_board
+```
 
+Optionally, you can still develop in project mode with the following:
+
+```sh
 # create Vivado project
 make create_project
 

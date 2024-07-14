@@ -1,9 +1,12 @@
-# project settings
+# Create Vivado project
+
+# get system args
 set project_name [lindex $argv 0]
 set top_module [lindex $argv 1]
 set fpga_part [lindex $argv 2]
 set hdl_type [lindex $argv 3]
 
+# fixes problem with "remote" files in project
 set origin_dir "[file normalize "."]"
 set project_dir "$origin_dir/project"
 
@@ -27,6 +30,8 @@ create_project $project_name $project_dir -part $fpga_part -force
 # add source files
 add_fileset "sources_1" "-srcset" "$origin_dir/rtl" $hdl_type
 set_property top $top_module [get_filesets sources_1]
+
+# prevent source files being duplicated in simulation set
 set design_top_obj [get_files -of_objects [get_filesets sources_1]]
 set_property -name "used_in_simulation" -value "0" -objects $design_top_obj
 
@@ -39,7 +44,6 @@ set constr_file_obj [get_files -of_objects [get_filesets constrs_1]]
 set_property -name "file_type" -value "XDC" -objects $constr_file_obj
 
 # finish file setup
-# import_files -force
 file mkdir "$project_dir/$project_name.gen/sources_1"
 
 # configure project

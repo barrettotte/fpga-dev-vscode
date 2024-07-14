@@ -15,6 +15,9 @@ set_property PACKAGE_PIN W5      [get_ports i_clk_100MHz]
 set_property IOSTANDARD LVCMOS33 [get_ports i_clk_100MHz]
 create_clock -add -name sys_clk_pin -period 10.00 -waveform {0.0 5.0} [get_ports {i_clk_100MHz}]
 
+# Buttons
+set_property -dict { PACKAGE_PIN U18   IOSTANDARD LVCMOS33 } [get_ports {i_clr}]
+
 ## LEDs
 set_property PACKAGE_PIN V14     [get_ports {o_clk_1Hz}]
 set_property IOSTANDARD LVCMOS33 [get_ports {o_clk_1Hz}]
