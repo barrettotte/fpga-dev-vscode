@@ -22,7 +22,19 @@ Also, verify GNU Make is installed with `make -v`.
 
 Edit source in VS Code, the [vscode-verilog-hdl-support](https://github.com/mshr-h/vscode-verilog-hdl-support) extension seems to work well for Verilog and Tcl.
 
-TODO:
+```sh
+# build bitstream file
+make build
+
+# build and upload bitstream to FPGA
+make program
+
+# create Vivado project
+make create_project
+
+# open Vivado project in GUI
+make gui
+```
 
 ## Vivado in Docker
 
