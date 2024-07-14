@@ -3,6 +3,7 @@ misc/vivado-docker/*.bin
 
 vivado*.jou
 vivado*.log
+vivado*.str
 clockinfo.txt
 
 build/

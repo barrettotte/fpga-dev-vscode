@@ -12,6 +12,10 @@ module blink (
 
     reg [31:0] counter = 0;
 
+    initial begin 
+        o_clk_1Hz = 0;
+    end
+
     always @(posedge i_clk_100MHz) begin
         if (counter == COUNT_TO) begin
             counter <= 0;

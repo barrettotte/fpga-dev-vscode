@@ -1,5 +1,5 @@
+`include "../rtl/blink.v"
 `timescale 1ns/1ps
-`include "rtl/blink.v"
 
 module blink_tb;
 
