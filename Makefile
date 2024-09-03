@@ -16,18 +16,16 @@ VIVADO_SETTINGS := $(VIVADO_ROOT)/settings64.bat
 FPGA_PART := xc7a35tcpg236-1
 DESIGN_NAME := blink
 TOP_MODULE := blink
+SIM_MODULE := "$(TOP_MODULE)"
 HDL_TYPE := v
-SIM_TIME := 500ns
 
 all: build
 
-.PHONY:	build
 build:	init_env
 	vivado -mode batch -nojournal -log $(LOGS_DIR)/build.log \
 	  -source $(SCRIPT_DIR)/build.tcl \
 	  -tclargs $(DESIGN_NAME) $(TOP_MODULE) $(FPGA_PART) $(HDL_TYPE)
 
-.PHONY: program_board
 program_board:	build
 	vivado -mode batch -nojournal -log $(LOGS_DIR)/program.log \
 	  -source $(SCRIPT_DIR)/program_board.tcl \
@@ -38,17 +36,11 @@ create_project:	init_env
 	  -source $(SCRIPT_DIR)/create_project.tcl \
 	  -tclargs $(DESIGN_NAME) $(TOP_MODULE) $(FPGA_PART) $(HDL_TYPE)
 
-.PHONY: simulate
 simulate:	init_env
 	vivado -mode batch -nojournal -log $(LOGS_DIR)/simulate.log \
 		-source $(SCRIPT_DIR)/simulate.tcl \
-		-tclargs $(DESIGN_NAME) $(TOP_MODULE) $(FPGA_PART) $(HDL_TYPE) $(SIM_TIME)
+		-tclargs $(DESIGN_NAME) $(SIM_MODULE) $(FPGA_PART) $(HDL_TYPE)
 
-.PHONY: gtkwave
-gtkwave:	simulate
-	wsl -e gtkwave "$(BUILD_DIR)/$(TOP_MODULE)_tb.vcd"
-
-.PHONY: gui
 gui: init_env
 	vivado -mode batch -nojournal -log $(LOGS_DIR)/gui.log \
 	  -source $(SCRIPT_DIR)/gui.tcl \
