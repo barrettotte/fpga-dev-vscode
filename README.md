@@ -11,39 +11,38 @@ This assumes Windows with WSL is used for FPGA development, it is required to us
 
 ### Requirements
 
-- Vivado 2023.2+
-- GNU Make
+- WSL
+- Vivado 2024.1+
 - GTKWave
 
-Verify Vivado is installed and its binaries (`xilinx/Vivado/2023.2/bin`) are in system path with `vivado -version`.
-Also, verify GNU Make is installed with `make -v` and GTKWave is installed with `wsl -e gtkwave --version`.
+Verify Vivado is installed and its binaries (`xilinx/Vivado/2024.1/bin`) are in system path with `vivado -version`.
+Also, verify GTKWave is installed on WSL with `wsl -e gtkwave --version`.
 
 ### Workflow
 
-Edit source in VS Code, the [vscode-verilog-hdl-support](https://github.com/mshr-h/vscode-verilog-hdl-support) extension seems to work well for Verilog and Tcl.
-
 ```sh
 # build bitstream file
-make build
+./vivado.ps1 build
 
 # simulate specific module testbench and generate waveform
-make SIM_MODULE=blink simulate
+$env:SIM_MODULE='blink'; ./vivado.ps1 simulate
 
 # open waveform in gtkwave via WSL
 wsl -e gtkwave build/blink_tb.vcd
 
 # build and upload bitstream to FPGA
 make program_board
+./vivado.ps1 program_board
 ```
 
 Optionally, you can still develop in project mode with the following:
 
 ```sh
 # create Vivado project
-make create_project
+./vivado.ps1 create_project
 
 # open Vivado project in GUI
-make gui
+./vivado.ps1 gui
 ```
 
 ## References
