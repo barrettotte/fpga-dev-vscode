@@ -7,13 +7,10 @@ The example in this repo is a simple 1Hz LED blink using Basys 3 Artix-7 board (
 
 ## Development
 
-This assumes Windows with WSL is used for FPGA development, it is required to use GTKWave.
-
-### Requirements
-
+Requirements:
 - WSL
 - Vivado 2024.1+
-- GTKWave
+- GTKWave (in WSL)
 
 Verify Vivado is installed and its binaries (`xilinx/Vivado/2024.1/bin`) are in system path with `vivado -version`.
 Also, verify GTKWave is installed on WSL with `wsl -e gtkwave --version`.
