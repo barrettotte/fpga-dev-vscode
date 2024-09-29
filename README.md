@@ -28,7 +28,6 @@ $env:SIM_MODULE='blink'; ./vivado.ps1 simulate
 wsl -e gtkwave build/blink_tb.vcd
 
 # build and upload bitstream to FPGA
-make program_board
 ./vivado.ps1 program_board
 ```
 
