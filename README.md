@@ -27,12 +27,6 @@ Project settings can be configured in `project.json`
     "hdlType" : "v",                    // HDL type (v, sv, vhdl)
     "topModule": "top",                 // top module of design (used as default target module if none specified in task.ps1)
     "fpgaPart": "xc7a35tcpg236-1",      // FPGA part #
-    "paths": {
-        "src": "rtl",                   // path to HDL source
-        "test": "tb",                   // path to testbench source
-        "build": "build",               // path to output temp/build files
-        "vivadoProject": "project"      // path to output optional Vivado project
-    }
 }
 ```
 
@@ -82,6 +76,8 @@ Things I hope to add over time.
 - support for verilator
 - support for vhdl
 - support for specifiying optional `.gtkw` files for `gtkwave` task
+- make directory paths configurable in `task.ps1` and TCL scripts
+- look into adding build caching for Vivado builds?
 - switch to Docker for all WSL commands
 
 ## References

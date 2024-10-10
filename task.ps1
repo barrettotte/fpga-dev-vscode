@@ -66,11 +66,10 @@ function Invoke-Task {
     $fpga_part = $config.fpgaPart
     $target_module = if (!$target_module) {$top_module} else {$target_module}
 
-    $src_dir = $config.paths.src
-    $test_dir = $config.paths.test
-    $build_dir = $config.paths.build
-
-    $project_dir = $config.paths.vivadoProject
+    $src_dir = 'rtl'
+    $test_dir = 'tb'
+    $build_dir = 'build'
+    $project_dir = 'project'
     New-Item -ItemType Directory -Force -Path $build_dir | Out-Null
     New-Item -ItemType Directory -Force -Path $project_dir | Out-Null
 
