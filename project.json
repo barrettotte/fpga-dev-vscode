@@ -1,0 +1,12 @@
+{
+    "designName": "dff-test",
+    "hdlType" : "v",
+    "topModule": "top",
+    "fpgaPart": "xc7a35tcpg236-1",
+    "paths": {
+        "src": "rtl",
+        "test": "tb",
+        "build": "build",
+        "vivadoProject": "project"
+    }
+}

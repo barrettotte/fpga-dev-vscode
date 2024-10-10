@@ -3,43 +3,86 @@
 Simple FPGA development workflow with VS Code.
 
 The goal of this workflow is to avoid opening Vivado GUI.
-The example in this repo is a simple 1Hz LED blink using Basys 3 Artix-7 board (XC7A35TCPG236-1).
+The example in this repo is a simple DFF using Basys 3 Artix-7 board (XC7A35TCPG236-1).
 
 ## Development
 
 Requirements:
+- Vivado 2024.1+ (installed in Windows, not WSL)
 - WSL
-- Vivado 2024.1+
-- GTKWave (in WSL)
+- GTKWave (in WSL `apt-get install gtkwave -y`)
+- Icarus Verilog (in WSL `apt-get install iverilog -y`)
 
-Verify Vivado is installed and its binaries (`xilinx/Vivado/2024.1/bin`) are in system path with `vivado -version`.
-Also, verify GTKWave is installed on WSL with `wsl -e gtkwave --version`.
+Verify Vivado is installed on Windows and its binaries (`xilinx/Vivado/2024.1/bin`) 
+are in system path with `vivado -version`.
 
 ### Workflow
 
+Project settings can be configured in `project.json`
+
+```js
+// example project.json
+{
+    "designName": "dff-test",           // design/project name
+    "hdlType" : "v",                    // HDL type (v, sv, vhdl)
+    "topModule": "top",                 // top module of design (used as default target module if none specified in task.ps1)
+    "fpgaPart": "xc7a35tcpg236-1",      // FPGA part #
+    "paths": {
+        "src": "rtl",                   // path to HDL source
+        "test": "tb",                   // path to testbench source
+        "build": "build",               // path to output temp/build files
+        "vivadoProject": "project"      // path to output optional Vivado project
+    }
+}
+```
+
 ```sh
 # build bitstream file
-./vivado.ps1 build
+./task.ps1 vivado-build
 
-# simulate specific module testbench and generate waveform
-$env:SIM_MODULE='blink'; ./vivado.ps1 simulate
+# simulate specific module's testbench and generate waveform
+./task.ps1 vivado-sim top
+
+# open waveform
+./task.ps1 gtkwave top
 
 # open waveform in gtkwave via WSL
-wsl -e gtkwave build/blink_tb.vcd
+wsl -e gtkwave build/top_tb.vcd
 
 # build and upload bitstream to FPGA
-./vivado.ps1 program_board
+./task.ps1 vivado-upload
 ```
 
 Optionally, you can still develop in project mode with the following:
 
 ```sh
 # create Vivado project
-./vivado.ps1 create_project
+./task.ps1 vivado-new
 
 # open Vivado project in GUI
-./vivado.ps1 gui
+./task.ps1 vivado-gui
 ```
+
+### Icarus Verilog
+
+To speed up development with Verilog, Icarus Verilog can be used in WSL.
+
+```sh
+# install dependencies
+apt-get install iverilog -y
+
+# build, simulate, and open waveform for module
+./task.ps1 iverilog top
+```
+
+## To Do
+
+Things I hope to add over time.
+
+- support for verilator
+- support for vhdl
+- support for specifiying optional `.gtkw` files for `gtkwave` task
+- switch to Docker for all WSL commands
 
 ## References
 

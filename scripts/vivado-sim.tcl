@@ -28,6 +28,7 @@ switch -exact $hdl_type {
         set hdl_language VHDL
     }
 }
+
 set_property target_language $hdl_language [current_project]
 set_property default_lib work [current_project]
 
