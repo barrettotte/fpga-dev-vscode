@@ -78,7 +78,9 @@ Things I hope to add over time.
 - support for specifiying optional `.gtkw` files for `gtkwave` task
 - make directory paths configurable in `task.ps1` and TCL scripts
 - look into adding build caching for Vivado builds?
-- switch to Docker for all WSL commands
+- option to use Docker for all WSL commands?
+- support for IP cores
+- support for Vitis
 
 ## References
 
